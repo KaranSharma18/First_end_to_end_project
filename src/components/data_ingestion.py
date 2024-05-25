@@ -7,6 +7,7 @@ from src.logger import logging
 from src.exception import CustomerException
 from dataclasses import dataclass
 from sklearn.model_selection import train_test_split
+from src.components.data_transformation import DataTransformation
 import pandas as pd
 
 
@@ -56,4 +57,9 @@ class DataIngestion:
 
 if __name__ == "__main__":
     obj = DataIngestion()
-    obj.inititate_data_ingestion()
+    train_data, text_data = obj.inititate_data_ingestion()
+
+    data_traformation = DataTransformation()
+    train_arr, test_arr, path = data_traformation.inititate_data_transformation(
+        train_data, text_data
+    )
