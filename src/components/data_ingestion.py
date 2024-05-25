@@ -4,10 +4,11 @@ import sys
 # Ensure the src directory is in the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 from src.logger import logging
-from src.exception import CustomerException
+from src.exception import CustomException
 from dataclasses import dataclass
 from sklearn.model_selection import train_test_split
 from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainer
 import pandas as pd
 
 
@@ -28,7 +29,7 @@ class DataIngestion:
         try:
             logging.info("Data Ingestion initiated")
 
-            df = pd.read_csv("notebook\data\stud.csv")
+            df = pd.read_csv("notebook/data/stud.csv")
 
             os.makedirs(
                 os.path.dirname(self.ingestion_config.raw_data_path), exist_ok=True
@@ -52,7 +53,7 @@ class DataIngestion:
             )
 
         except Exception as e:
-            raise CustomerException(e, sys)
+            raise CustomException(e, sys)
 
 
 if __name__ == "__main__":
@@ -63,3 +64,6 @@ if __name__ == "__main__":
     train_arr, test_arr, path = data_traformation.inititate_data_transformation(
         train_data, text_data
     )
+
+    model_trainer = ModelTrainer()
+    print(model_trainer.initiate_model_trainer(train_arr, test_arr))

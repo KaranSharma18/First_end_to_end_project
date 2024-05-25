@@ -4,7 +4,7 @@ import sys
 import numpy as np
 import pandas as pd
 from src.logger import logging
-from src.exception import CustomerException
+from src.exception import CustomException
 from src.utils import save_object
 from dataclasses import dataclass
 
@@ -65,7 +65,7 @@ class DataTransformation:
             return preprocessor
 
         except Exception as e:
-            raise CustomerException(e, sys)
+            raise CustomException(e, sys)
 
     def inititate_data_transformation(self, train_path, test_path):
         logging.info("Entered inititate_data_transformation method")
@@ -112,4 +112,4 @@ class DataTransformation:
             )
 
         except Exception as e:
-            raise CustomerException(e, sys)
+            raise CustomException(e, sys)
